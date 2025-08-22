@@ -110,5 +110,3 @@ const HomeSearch = () => {
 }
 
 export default HomeSearch
-
-//1:34:00
