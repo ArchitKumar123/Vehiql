@@ -6,6 +6,8 @@ export const metadata = {
   title: "Dashboard | Vehiql Admin",
   description: "Admin dashboard for Vehiql car marketplace",
 };
+
+export const dynamic = "force-dynamic";
 const AdminPage = async () => {
 
   // Fetch dashboard data
