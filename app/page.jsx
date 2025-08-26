@@ -1,14 +1,18 @@
+import { getFeaturedCars } from "@/actions/home";
 import CarCard from "@/components/car-card";
 import HomeSearch from "@/components/home-search";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { bodyTypes, carMakes, faqItems, featuredCars } from "@/lib/data";
+import { bodyTypes, carMakes, faqItems } from "@/lib/data";
 import { SignedOut } from "@clerk/nextjs";
 import { Calendar, Car, ChevronRight, Shield } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+
+  const featuredCars = await getFeaturedCars();
+
   return (
     <div className="pt-20 flex flex-col">
       {/* Hero */}
@@ -30,7 +34,7 @@ export default function Home() {
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-2xl font-bold">Featured Cars</h2>
             <Button variant="ghost" className="flex items-center" asChild>
-              <Link href="/cars">
+              <Link href="/">
                 View All <ChevronRight className="ml-1 h-4 w-4" />
               </Link>
             </Button>
