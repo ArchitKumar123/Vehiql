@@ -8,7 +8,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export async function getFeaturedCars(limit = 3) {
   try {
-    const cars = await db.car.findMany({
+    const cars = await db.Car.findMany({
       where: {
         featured: true,
         status: "AVAILABLE",
@@ -34,7 +34,7 @@ export async function processImageSearch(file) {
     const req = await request();
 
     const decision = await aj.protect(req, {
-      requwsted: 1,
+      requested: 1,
     });
 
     if (decision.isDenied()) {

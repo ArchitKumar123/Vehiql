@@ -7,7 +7,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { v4 as uuidv4 } from "uuid";
-import {serializeCarData} from "@/lib/helper"
+import { serializeCarData } from "@/lib/helper";
 
 async function fileToBase64(file) {
   const bytes = await file.arrayBuffer();
@@ -89,12 +89,12 @@ export async function processCarImageWithAI(file) {
       ];
 
       const missingFields = requiredFields.filter(
-        (field) => !(field in carDetails)
+        (field) => !(field in carDetails),
       );
 
       if (missingFields.length > 0) {
         throw new Error(
-          `AI response missing required fields: ${missingFields.join(", ")}`
+          `AI response missing required fields: ${missingFields.join(", ")}`,
         );
       }
 
@@ -103,7 +103,7 @@ export async function processCarImageWithAI(file) {
         data: carDetails,
       };
     } catch (error) {
-      console.error("Failed to parse AI response:", parseError);
+      console.error("Failed to parse AI response:", error);
       return {
         success: false,
         error: "Failed to parse AI response",
@@ -231,21 +231,21 @@ export async function getCars(search = "") {
 
     const cars = await db.car.findMany({
       where,
-      orderBy: {createdAt: "desc"},
-    })
+      orderBy: { createdAt: "desc" },
+    });
 
     const serializedCars = cars.map(serializeCarData);
 
     return {
       success: true,
       data: serializedCars,
-    }
+    };
   } catch (error) {
     console.error("Error fetching cars:", error);
     return {
       success: false,
       error: error.message,
-    }
+    };
   }
 }
 
